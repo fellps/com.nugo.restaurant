@@ -9,10 +9,12 @@ const Routes = function (router, use) {
   /** Bills */
   router.get('/bills', Business.Bills.get)
   router.post('/bills', Business.Bills.create)
+  router.put('/bills', Business.Bills.update)
 
   /** Orders */
   router.get('/orders', Business.Orders.get)
   router.post('/orders', Business.Orders.create)
+  router.put('/orders', Business.Orders.update)
 }
 
 module.exports = Routes

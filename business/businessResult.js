@@ -2,20 +2,23 @@ const moment = require('moment')
 
 const BusinessResult = {
     success: (ctx, data, message) => {
-        return ctx.body = {
+        ctx.status = 200
+        ctx.body = {
             data: data ? data || [] : [],
             error: false,
             requestedAt: moment().format(),
             message: message ? message : 'Success',
-            status: 200
         }
+        return ctx
     },
     error: (ctx, message) => {
-        return ctx.body = {
+        ctx.status = 500
+        ctx.body = {
             error: true,
             requestedAt: moment().format(),
             message: message
         }
+        return ctx
     },
 }
 

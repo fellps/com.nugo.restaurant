@@ -29,6 +29,24 @@ const Orders = {
     } catch (err) {
       return businessResult.error(ctx, 'Error while saving in DB')
     }
+  },
+
+  update: async (ctx) => {
+    const Order = DB.Order()
+    const params = ctx.request.body
+    if (_.isEmpty(params)) {
+      return businessResult.error(ctx, 'The request body is empty')
+    }
+    try {
+      let value = await Order.findOne({ IdOrder: params.IdOrder })
+      if (!_.isEmpty(value)) {
+        await Order.update(value, params)
+        return businessResult.success(ctx, value)
+      }
+      return businessResult.error(ctx, 'Object not found')
+    } catch (err) {
+      return businessResult.error(ctx, 'Error while saving in DB')
+    }
   }
 }
 
