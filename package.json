@@ -20,9 +20,13 @@
     "moment": "^2.22.1",
     "monk": "^6.0.6",
     "node-env-file": "^0.1.8",
-    "os-tmpdir": "^1.0.2"
+    "os-tmpdir": "^1.0.2",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
-    "nodemon": "^1.17.4"
+    "mocha": "^5.1.1",
+    "nodemon": "^1.17.4",
+    "should": "^13.2.1",
+    "supertest": "^3.1.0"
   }
 }

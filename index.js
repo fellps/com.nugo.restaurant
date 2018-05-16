@@ -38,7 +38,7 @@ const Use = function (fn) {
 
 Routes(Methods, Use)
 
-app.listen(config.port, config.ip)
+module.exports = app.listen(config.port, config.ip)
 
 const infoIP = `Starting on:
   ${ip.address()}:${config.port}

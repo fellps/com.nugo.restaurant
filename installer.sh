@@ -23,13 +23,10 @@ sudo service mongodb enable
 sudo service mongodb start
 
 echo "
-
 network={
-    ssid=\"NUGO-TI\"
-    psk=\"wifi@nugopraiati\"
+    ssid=\"NUGO\"
+    psk=\"583dkglexnf\"
 }
-
 " >> "/etc/wpa_supplicant/wpa_supplicant.conf"
-
 
 reboot

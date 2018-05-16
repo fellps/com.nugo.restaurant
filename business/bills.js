@@ -23,7 +23,7 @@ const Bills = {
     try {
       let value = await Bill.findOne({ IdBill: params.IdBill })
       if (_.isEmpty(value)) {
-        value = await Bill.insert(Object.assign({}, params, { date: (new Date()) }))
+        value = await Bill.insert(Object.assign({}, params, { CreatedAt: (new Date()) }))
       }
       return businessResult.success(ctx, value)
     } catch (err) {

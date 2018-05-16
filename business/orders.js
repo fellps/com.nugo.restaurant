@@ -23,7 +23,7 @@ const Orders = {
     try {
       let value = await Order.findOne({ IdOrder: params.IdOrder })
       if (_.isEmpty(value)) {
-        value = await Order.insert(Object.assign({}, params, { date: (new Date()) }))
+        value = await Order.insert(Object.assign({}, params, { CreatedAt: (new Date()) }))
       }
       return businessResult.success(ctx, value)
     } catch (err) {
