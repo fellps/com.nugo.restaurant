@@ -1,5 +1,5 @@
-const Bills = require('./bills')
-const Orders = require('./orders')
+const Bills = require('./Bills')
+const Orders = require('./Orders')
 
 module.exports = {
   Bills,

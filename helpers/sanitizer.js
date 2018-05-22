@@ -1,11 +1,11 @@
 const _ = require('lodash')
 
-const sanitizer = (val, addQuotes = true) => {
+const Sanitizer = (val, addQuotes = true) => {
   if (_.isObject(val)) {
-    return _.map(val, (value, key) => sanitizer(value, false))
+    return _.map(val, (value, key) => Sanitizer(value, false))
   } else {
     return addQuotes ? `'${val.toString().replace(/'/g, "''")}'` : `${val.toString().replace(/'/g, "''")}`
   }
 }
 
-module.exports = sanitizer
+module.exports = Sanitizer
