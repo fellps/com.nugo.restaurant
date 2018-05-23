@@ -8,6 +8,8 @@ const Bills = {
     const params = ctx.query
     if (Object.prototype.hasOwnProperty.call(params, 'TableNumber'))
       params.TableNumber = parseInt(params.TableNumber)
+    if (Object.prototype.hasOwnProperty.call(params, 'BillStatus'))
+      params.BillStatus = parseInt(params.BillStatus)
     try {
       const bills = await Bill.find(params)
       return BusinessResult.success(ctx, bills)
