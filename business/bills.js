@@ -44,7 +44,8 @@ const Bills = {
     try {
       let value = await Bill.findOne({ IdBill: params.IdBill })
       if (!_.isEmpty(value)) {
-        await Bill.update(value, params)
+        await Bill.update(value, { $set: params })
+        value = await Bill.findOne({ IdBill: params.IdBill })
         return BusinessResult.success(ctx, value)
       }
       return BusinessResult.error(ctx, 'Object not found')

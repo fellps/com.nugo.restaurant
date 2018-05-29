@@ -15,6 +15,11 @@ const Routes = function (router, use) {
   router.get('/orders', Business.Orders.get)
   router.post('/orders', Business.Orders.create)
   router.put('/orders', Business.Orders.update)
+
+  /** OrderDelivery */
+  router.get('/orderDelivery', Business.OrderDelivery.get)
+  router.post('/orderDelivery', Business.OrderDelivery.create)
+  router.put('/orderDelivery', Business.OrderDelivery.update)
 }
 
 module.exports = Routes
