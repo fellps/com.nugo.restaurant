@@ -7,10 +7,38 @@ const OrderDelivery = {
     const OrderDelivery = DB.OrderDelivery()
     const params = ctx.query
     try {
-      const orderDelivery = await OrderDelivery.find(params)
+      const orderDelivery = await OrderDelivery.aggregate([
+        {
+          $lookup: {
+            from: "order",
+            localField : "IdOrder",
+            foreignField : "IdOrder",
+            as : "Order"
+          },
+        },
+        { $unwind: "$Order" },
+        {
+          $lookup: {
+            from: "bill",
+            localField : "Order.IdBill",
+            foreignField : "IdBill",
+            as : "Bill"
+          },
+        },
+        { $unwind: "$Bill" },
+        {
+          $match : { "Bill.BillStatus": 1 }
+        },
+        {
+          $project: {
+            "IdOrderDelivery": 1,
+            "IdOrder": 1
+          }
+        }
+      ])
       return businessResult.success(ctx, orderDelivery)
     } catch (err) {
-      return businessResult.error(ctx, 'Error while saving in DB')
+      return businessResult.error(ctx, 'Error while searching in DB')
     }
   },
 
