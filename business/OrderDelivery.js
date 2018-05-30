@@ -27,7 +27,7 @@ const OrderDelivery = {
         },
         { $unwind: "$Bill" },
         {
-          $match : { "Bill.BillStatus": 1 }
+          $match : { "Bill.IdBill": params.IdBill }
         },
         {
           $project: {
