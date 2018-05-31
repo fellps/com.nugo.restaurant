@@ -5,39 +5,18 @@ const businessResult = require('../business/businessResult')
 const OrderDelivery = {
   get: async (ctx) => {
     const OrderDelivery = DB.OrderDelivery()
+    const Order = DB.Order()
     const params = ctx.query
     try {
-      const orderDelivery = await OrderDelivery.aggregate([
-        {
-          $lookup: {
-            from: "order",
-            localField : "IdOrder",
-            foreignField : "IdOrder",
-            as : "Order"
-          },
-        },
-        { $unwind: "$Order" },
-        {
-          $lookup: {
-            from: "bill",
-            localField : "Order.IdBill",
-            foreignField : "IdBill",
-            as : "Bill"
-          },
-        },
-        { $unwind: "$Bill" },
-        {
-          $match : { "Bill.IdBill": params.IdBill }
-        },
-        {
-          $project: {
-            "IdOrderDelivery": 1,
-            "IdOrder": 1
-          }
-        }
-      ])
+      const order = await Order.find({ IdBill: params.IdBill })
+      const arrIdOrder = order.map(function(value) {
+        return value.IdOrder
+      })
+      const orderDelivery = await OrderDelivery.find({ IdOrder: { $in: arrIdOrder }})
+      
       return businessResult.success(ctx, orderDelivery)
     } catch (err) {
+      console.log(err)
       return businessResult.error(ctx, 'Error while searching in DB')
     }
   },

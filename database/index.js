@@ -4,9 +4,11 @@ const DB = require('monk')(config.database)
 const Bill = () => DB.get('bill')
 const Order = () => DB.get('order')
 const OrderDelivery = () => DB.get('orderDelivery')
+const ReduceOrder = () => DB.get('reduceOrder')
 
 module.exports = {
   Bill: Bill,
   Order: Order,
-  OrderDelivery: OrderDelivery
+  OrderDelivery: OrderDelivery,
+  ReduceOrder: ReduceOrder
 }
