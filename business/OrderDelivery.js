@@ -1,6 +1,6 @@
 const DB = require('../database')
 const _ = require('lodash')
-const businessResult = require('../business/businessResult')
+const BusinessResult = require('../business/BusinessResult')
 
 const OrderDelivery = {
   get: async (ctx) => {
@@ -14,9 +14,9 @@ const OrderDelivery = {
       })
       const orderDelivery = await OrderDelivery.find({ IdOrder: { $in: arrIdOrder }})
       
-      return businessResult.success(ctx, orderDelivery)
+      return BusinessResult.success(ctx, orderDelivery)
     } catch (err) {
-      return businessResult.error(ctx, 'Error while searching in DB')
+      return BusinessResult.error(ctx, 'Error while searching in DB')
     }
   },
 
@@ -24,16 +24,16 @@ const OrderDelivery = {
     const OrderDelivery = DB.OrderDelivery()
     const params = ctx.request.body
     if (_.isEmpty(params)) {
-      return businessResult.error(ctx, 'The request body is empty')
+      return BusinessResult.error(ctx, 'The request body is empty')
     }
     try {
       let value = await OrderDelivery.findOne({ IdOrderDelivery: params.IdOrderDelivery })
       if (_.isEmpty(value)) {
         value = await OrderDelivery.insert(Object.assign({}, params, { CreatedAt: (new Date()) }))
       }
-      return businessResult.success(ctx, value)
+      return BusinessResult.success(ctx, value)
     } catch (err) {
-      return businessResult.error(ctx, 'Error while saving in DB')
+      return BusinessResult.error(ctx, 'Error while saving in DB')
     }
   },
 
@@ -41,18 +41,18 @@ const OrderDelivery = {
     const OrderDelivery = DB.OrderDelivery()
     const params = ctx.request.body
     if (_.isEmpty(params)) {
-      return businessResult.error(ctx, 'The request body is empty')
+      return BusinessResult.error(ctx, 'The request body is empty')
     }
     try {
       let value = await OrderDelivery.findOne({ IdOrderDelivery: params.IdOrderDelivery })
       if (!_.isEmpty(value)) {
         await OrderDelivery.update(value, { $set: params })
         value = await OrderDelivery.findOne({ IdOrderDelivery: params.IdOrderDelivery })
-        return businessResult.success(ctx, value)
+        return BusinessResult.success(ctx, value)
       }
-      return businessResult.error(ctx, 'Object not found')
+      return BusinessResult.error(ctx, 'Object not found')
     } catch (err) {
-      return businessResult.error(ctx, 'Error while saving in DB')
+      return BusinessResult.error(ctx, 'Error while saving in DB')
     }
   }
 }
