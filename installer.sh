@@ -8,8 +8,10 @@ apt-get install -y nodejs
 npm install -g n
 n latest
 
+#INSTALL PACKAGES FOR DEVELOPMENT
 apt-get install -y build-essential libudev-dev
 
+#INSTALL PM2 AND GYP
 npm install -g pm2
 npm install -g node-gyp
 
@@ -18,8 +20,13 @@ apt-get install -y mongodb-server
 sudo service mongodb enable
 sudo service mongodb start
 
+#REMOVE LOCAL DATABASE
 mongo nugo-restaurant --eval "db.dropDatabase()"
 
+#INSTALL NODE MODULES
+npm install
+
+#ADD SERVICE TO PM2
 pm2 start index.js --name=RESTAURANT_SERVICE --watch
 pm2 save
 pm2 startup
