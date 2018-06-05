@@ -1,7 +1,6 @@
 #! /bin/bash
 
 apt-get -y update
-#apt-get upgrade
 
 #INSTALL NODE
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
@@ -18,6 +17,8 @@ npm install -g node-gyp
 apt-get install -y mongodb-server
 sudo service mongodb enable
 sudo service mongodb start
+
+mongo nugo-restaurant --eval "db.dropDatabase()"
 
 pm2 start index.js --name=RESTAURANT_SERVICE --watch
 pm2 save

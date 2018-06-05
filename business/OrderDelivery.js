@@ -16,7 +16,6 @@ const OrderDelivery = {
       
       return businessResult.success(ctx, orderDelivery)
     } catch (err) {
-      console.log(err)
       return businessResult.error(ctx, 'Error while searching in DB')
     }
   },

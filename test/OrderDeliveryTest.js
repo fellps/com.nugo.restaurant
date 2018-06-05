@@ -5,6 +5,7 @@ const request = require('supertest')
 const server = require('../index')
 
 const mockOrderDelivery = require('./mockData/OrderDelivery')
+const mockBill = require('./mockData/Bill')
 
 describe('OrderDelivery', () => {
   it('Should insert a order delivery', (done) => {
@@ -37,7 +38,7 @@ describe('OrderDelivery', () => {
 
   it('Should return a order delivery', (done) => {
     request(server)
-      .get(`/orderDelivery?IdOrder=${mockOrderDelivery.IdOrder}`)
+      .get(`/orderDelivery?IdBill=${mockBill.IdBill}`)
       .set('Content-Type', 'application/json')
       .end(function (err, res) {
         should.not.exist(err)
