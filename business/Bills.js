@@ -6,9 +6,9 @@ const Bills = {
   get: async (ctx) => {
     const Bill = DB.Bill()
     const params = ctx.query
-    if (Object.prototype.hasOwnProperty.call(params, 'TableNumber'))
+    if (_.has(params, 'TableNumber'))
       params.TableNumber = parseInt(params.TableNumber)
-    if (Object.prototype.hasOwnProperty.call(params, 'BillStatus'))
+    if (_.has(params, 'BillStatus'))
       params.BillStatus = parseInt(params.BillStatus)
     try {
       const bills = await Bill.find(params)
