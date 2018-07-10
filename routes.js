@@ -11,6 +11,11 @@ const Routes = function (router, use) {
   router.post('/bills', Business.Bills.create)
   router.put('/bills', Business.Bills.update)
 
+    /** BillPayments */
+  router.get('/billPayments', Business.BillPayments.get)
+  router.post('/billPayments', Business.BillPayments.create)
+  router.put('/billPayments', Business.BillPayments.update)
+
   /** Orders */
   router.get('/orders', Business.Orders.get)
   router.post('/orders', Business.Orders.create)
